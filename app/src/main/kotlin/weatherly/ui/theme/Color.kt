@@ -1,4 +1,4 @@
-package com.example.weatherly.ui.theme
+package weatherly.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
