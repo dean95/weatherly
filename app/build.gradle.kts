@@ -68,6 +68,10 @@ dependencies {
     implementation(libs.ktor.client.logging)
     implementation(libs.kotlinx.serialization.json)
 
+    // Multithreading
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+
     // Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
