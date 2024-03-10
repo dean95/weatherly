@@ -3,7 +3,9 @@ package weatherly.application
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import weatherly.core.di.threadingModule
 import weatherly.network.di.networkModule
+import weatherly.weather.di.weatherModule
 
 class WeatherlyApplication : Application() {
 
@@ -20,6 +22,8 @@ class WeatherlyApplication : Application() {
     }
 
     private fun getModules() = listOf(
-        networkModule
+        networkModule,
+        weatherModule,
+        threadingModule
     )
 }
