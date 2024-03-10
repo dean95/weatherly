@@ -4,5 +4,5 @@ import weatherly.weather.data.network.model.LocationSearchResultItem
 
 interface WeatherApi {
 
-    suspend fun searchLocation(): List<LocationSearchResultItem>
+    suspend fun searchLocation(query: String): List<LocationSearchResultItem>
 }

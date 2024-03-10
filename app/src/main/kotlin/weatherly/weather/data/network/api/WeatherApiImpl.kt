@@ -13,7 +13,7 @@ internal class WeatherApiImpl(
     client: HttpClient
 ) : WeatherApi, BaseApi(client) {
 
-    override suspend fun searchLocation(): List<LocationSearchResultItem> = execute {
-        get("$BASE_URL/locations/v1/cities/autocomplete?apikey=$API_KEY").body()
+    override suspend fun searchLocation(query: String): List<LocationSearchResultItem> = execute {
+        get("$BASE_URL/locations/v1/cities/autocomplete?apikey=$API_KEY&q=$query").body()
     }
 }
