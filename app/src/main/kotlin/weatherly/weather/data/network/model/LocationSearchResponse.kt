@@ -2,6 +2,7 @@ package weatherly.weather.data.network.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import weatherly.weather.domain.model.Location
 
 @Serializable
 data class LocationSearchResultItem(
@@ -35,5 +36,10 @@ data class LocationSearchResultItem(
         val id: String,
         @SerialName("LocalizedName")
         val localizedName: String
+    )
+
+    fun toDomain() = Location(
+        id = key,
+        name = localizedName
     )
 }
