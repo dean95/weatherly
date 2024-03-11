@@ -7,6 +7,7 @@ import weatherly.weather.data.network.api.WeatherApi
 import weatherly.weather.data.network.api.WeatherApiImpl
 import weatherly.weather.data.repository.WeatherRepository
 import weatherly.weather.data.repository.WeatherRepositoryImpl
+import weatherly.weather.domain.useCase.FetchLocationsForQuery
 
 val weatherModule = module {
 
@@ -18,4 +19,6 @@ val weatherModule = module {
             backgroundDispatcher = get(named(BACKGROUND_DISPATCHER))
         )
     }
+
+    single { FetchLocationsForQuery(weatherRepository = get()) }
 }
