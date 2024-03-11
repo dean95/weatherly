@@ -1,4 +1,4 @@
-package weatherly.ui.home
+package weatherly.home.ui
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
@@ -14,6 +14,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,7 +26,11 @@ import com.example.weatherly.R
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    viewModel: HomeViewModel
+) {
+    val homeViewState = viewModel.uiState.collectAsState().value
+
     var text by remember { mutableStateOf("") }
     var active by remember { mutableStateOf(false) }
 
@@ -35,6 +40,7 @@ fun HomeScreen() {
             query = text,
             onQueryChange = {
                 text = it
+                viewModel.emitLocationSearchQuery(it)
             },
             onSearch = {
                 active = false
