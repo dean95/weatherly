@@ -1,6 +1,6 @@
 package weatherly.weather.domain.useCase
 
-import weatherly.weather.data.repository.WeatherRepository
+import weatherly.weather.domain.repository.WeatherRepository
 import weatherly.weather.domain.model.Location
 
 class FetchLocationsForQuery(
