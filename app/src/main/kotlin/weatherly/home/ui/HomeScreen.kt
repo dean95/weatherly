@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
@@ -23,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.example.weatherly.R
@@ -123,13 +125,20 @@ fun HomeScreen(
                                 )
                         )
                     } else {
-                        locationItems.value.forEach {
+                        locationItems.value.forEach { locationItemUiState ->
                             LocationItem(
-                                name = it.name,
-                                modifier = Modifier.padding(
-                                    horizontal = MaterialTheme.spacing.medium,
-                                    vertical = MaterialTheme.spacing.small
-                                )
+                                locationItemUiState = locationItemUiState,
+                                onLocationItemClick = {
+                                    viewModel.fetchForecast(it.id)
+                                    active = false
+                                    text = it.name
+                                },
+                                modifier = Modifier
+                                    .padding(
+                                        horizontal = MaterialTheme.spacing.medium,
+                                        vertical = MaterialTheme.spacing.small
+                                    )
+                                    .fillMaxWidth()
                             )
                         }
                     }
@@ -145,11 +154,21 @@ fun HomeScreen(
 
 @Composable
 private fun LocationItem(
-    name: String,
+    locationItemUiState: LocationItemUiState,
+    onLocationItemClick: (LocationItemUiState) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Text(
-        text = name,
+        text = locationItemUiState.name,
+        style = MaterialTheme.typography.bodyLarge,
         modifier = modifier
+            .clip(RoundedCornerShape(size = MaterialTheme.spacing.medium))
+            .clickable {
+                onLocationItemClick(locationItemUiState)
+            }
+            .padding(
+                horizontal = MaterialTheme.spacing.medium,
+                vertical = MaterialTheme.spacing.small
+            )
     )
 }

@@ -17,7 +17,7 @@ internal class WeatherRepositoryImpl(
 
     private val latestWeatherDataMutex = Mutex()
 
-    private var latestForecast: List<Forecast> = emptyList()
+    private val latestForecastForLocation: MutableMap<String, List<Forecast>> = mutableMapOf()
 
     override suspend fun fetchLocations(query: String): List<Location> =
         weatherApi
@@ -25,17 +25,17 @@ internal class WeatherRepositoryImpl(
             .map(LocationSearchResultItem::toDomain)
 
     override suspend fun fetchFiveDayForecast(locationKey: String, refresh: Boolean): List<Forecast> {
-        return if (refresh || latestForecast.isEmpty()) {
+        return if (refresh || locationKey !in latestForecastForLocation) {
             applicationScope.async {
                 val networkResponse = weatherApi.fetchFiveDayForecast(locationKey)
                 val forecast = networkResponse.toForecast()
                 latestWeatherDataMutex.withLock {
-                    latestForecast = forecast
+                    latestForecastForLocation[locationKey] = forecast
                 }
                 forecast
             }.await()
         } else {
-            latestWeatherDataMutex.withLock { this.latestForecast }
+            latestWeatherDataMutex.withLock { latestForecastForLocation.getValue(locationKey) }
         }
     }
 }

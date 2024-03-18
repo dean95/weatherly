@@ -16,7 +16,9 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import weatherly.core.viewState.Async
+import weatherly.weather.domain.model.Forecast
 import weatherly.weather.domain.model.Location
+import weatherly.weather.domain.useCase.FetchFiveDayForecast
 import weatherly.weather.domain.useCase.FetchLocationsForQuery
 
 private const val INITIAL_LOCATION_SEARCH_QUERY = ""
@@ -25,7 +27,8 @@ private const val MIN_QUERY_LENGTH = 1
 
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 class HomeViewModel(
-    private val fetchLocationsForQuery: FetchLocationsForQuery
+    private val fetchLocationsForQuery: FetchLocationsForQuery,
+    private val fetchFiveDayForecast: FetchFiveDayForecast
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
@@ -39,6 +42,24 @@ class HomeViewModel(
 
     fun emitLocationSearchQuery(query: String) {
         locationSearchQueryState.tryEmit(query)
+    }
+
+    fun fetchForecast(locationKey: String) {
+        viewModelScope.launch {
+            try {
+                _uiState.update { it.copy(forecastItems = Async.Loading) }
+                val forecast = fetchFiveDayForecast(locationKey)
+                _uiState.update {
+                    it.copy(
+                        forecastItems = Async.Success(
+                            forecast.map(Forecast::toForecastItemUiState)
+                        )
+                    )
+                }
+            } catch (ioe: IOException) {
+                _uiState.update { it.copy(forecastItems = Async.Fail(ioe)) }
+            }
+        }
     }
 
     private fun observeLocationsSearchResult() {

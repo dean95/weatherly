@@ -8,7 +8,8 @@ val homeModule = module {
 
     viewModel {
         HomeViewModel(
-            fetchLocationsForQuery = get()
+            fetchLocationsForQuery = get(),
+            fetchFiveDayForecast = get()
         )
     }
 }
