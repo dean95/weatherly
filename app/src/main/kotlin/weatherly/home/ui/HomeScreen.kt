@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
@@ -18,10 +20,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import com.example.weatherly.R
+import weatherly.core.viewState.Async
+import weatherly.coreUi.LoadingIndicator
+import weatherly.ui.theme.spacing
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -29,14 +36,16 @@ import com.example.weatherly.R
 fun HomeScreen(
     viewModel: HomeViewModel
 ) {
-    val homeViewState = viewModel.uiState.collectAsState().value
+    val homeUiState = viewModel.uiState.collectAsState().value
 
-    var text by remember { mutableStateOf("") }
-    var active by remember { mutableStateOf(false) }
+    var text by rememberSaveable { mutableStateOf("") }
+    var active by rememberSaveable { mutableStateOf(false) }
 
     Scaffold {
         SearchBar(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(MaterialTheme.spacing.small),
             query = text,
             onQueryChange = {
                 text = it
@@ -79,7 +88,68 @@ fun HomeScreen(
                 }
             }
         ) {
+            when (val locationItems = homeUiState.locationItems) {
+                is Async.Fail -> {
+                    Text(
+                        text = stringResource(id = R.string.something_went_wrong),
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                horizontal = MaterialTheme.spacing.medium,
+                                vertical = MaterialTheme.spacing.small
+                            )
+                    )
+                }
 
+                Async.Loading -> {
+                    LoadingIndicator(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(all = MaterialTheme.spacing.medium)
+                    )
+                }
+
+                is Async.Success -> {
+                    if (locationItems.value.isEmpty()) {
+                        Text(
+                            text = stringResource(id = R.string.no_location),
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(
+                                    horizontal = MaterialTheme.spacing.medium,
+                                    vertical = MaterialTheme.spacing.small
+                                )
+                        )
+                    } else {
+                        locationItems.value.forEach {
+                            LocationItem(
+                                name = it.name,
+                                modifier = Modifier.padding(
+                                    horizontal = MaterialTheme.spacing.medium,
+                                    vertical = MaterialTheme.spacing.small
+                                )
+                            )
+                        }
+                    }
+                }
+
+                Async.Uninitialized -> {
+                    /* no-op */
+                }
+            }
         }
     }
+}
+
+@Composable
+private fun LocationItem(
+    name: String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = name,
+        modifier = modifier
+    )
 }

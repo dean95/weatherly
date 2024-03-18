@@ -1,9 +1,10 @@
 package weatherly.home.ui
 
+import weatherly.core.viewState.Async
 import weatherly.weather.domain.model.Location
 
 data class HomeUiState(
-    val locationItems: List<LocationItemUiState> = listOf()
+    val locationItems: Async<List<LocationItemUiState>> = Async.Uninitialized
 )
 
 data class LocationItemUiState(

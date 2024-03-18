@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import weatherly.core.viewState.Async
 import weatherly.weather.domain.model.Location
 import weatherly.weather.domain.useCase.FetchLocationsForQuery
 
@@ -46,15 +47,14 @@ class HomeViewModel(
                 .debounce(SEARCH_DELAY_MILLIS)
                 .filter(String::isNotBlank)
                 .distinctUntilChanged()
-                .flatMapLatest {
-                    if (it.length >= MIN_QUERY_LENGTH) {
+                .flatMapLatest { query ->
+                    if (query.length >= MIN_QUERY_LENGTH) {
                         try {
-                            // TODO: Start loading indicator here
-                            val locations = fetchLocationsForQuery(it)
-                            // TODO: End loading indicator here
+                            _uiState.update { it.copy(locationItems = Async.Loading) }
+                            val locations = fetchLocationsForQuery(query)
                             flowOf(locations)
                         } catch (ioe: IOException) {
-                            // TODO: Update UI state with error here
+                            _uiState.update { it.copy(locationItems = Async.Fail(ioe)) }
                             emptyFlow()
                         }
                     } else {
@@ -63,7 +63,7 @@ class HomeViewModel(
                 }
                 .collect { locations ->
                     _uiState.update {
-                        it.copy(locationItems = locations.map(Location::toLocationItemUiState))
+                        it.copy(locationItems = Async.Success(locations.map(Location::toLocationItemUiState)))
                     }
                 }
         }

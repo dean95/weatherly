@@ -2,6 +2,8 @@
     <string name="app_name">Weatherly</string>
 
     <string name="search_for_city">Search for a city</string>
+    <string name="no_location">No location items</string>
+    <string name="something_went_wrong">Oops! Something went wrong.</string>
 
     <string name="cd_search_icon">Search Icon</string>
     <string name="cd_close_icon">Close Icon</string>
