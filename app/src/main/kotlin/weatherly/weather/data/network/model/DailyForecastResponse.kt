@@ -8,7 +8,7 @@ import weatherly.weather.domain.model.Forecast
 data class DailyForecastResponse(
     @SerialName("DailyForecasts")
     val dailyForecasts: List<DailyForecast>,
-    @SerialName("headline")
+    @SerialName("Headline")
     val headline: Headline
 ) {
 
@@ -28,7 +28,7 @@ data class DailyForecastResponse(
     data class DailyForecast(
         @SerialName("Date")
         val date: String,
-        @SerialName("day")
+        @SerialName("Day")
         val day: Day,
         @SerialName("EpochDate")
         val epochDate: Int,
@@ -53,9 +53,9 @@ data class DailyForecastResponse(
             @SerialName("IconPhrase")
             val iconPhrase: String,
             @SerialName("PrecipitationIntensity")
-            val precipitationIntensity: String,
+            val precipitationIntensity: String? = null,
             @SerialName("PrecipitationType")
-            val precipitationType: String
+            val precipitationType: String? = null
         )
 
         @Serializable
@@ -67,9 +67,9 @@ data class DailyForecastResponse(
             @SerialName("IconPhrase")
             val iconPhrase: String,
             @SerialName("PrecipitationIntensity")
-            val precipitationIntensity: String,
+            val precipitationIntensity: String? = null,
             @SerialName("PrecipitationType")
-            val precipitationType: String
+            val precipitationType: String? = null
         )
 
         @Serializable
