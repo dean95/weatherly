@@ -2,6 +2,7 @@ package weatherly.weather.data.network.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import weatherly.weather.domain.model.Forecast
 
 @Serializable
 data class DailyForecastResponse(
@@ -10,6 +11,18 @@ data class DailyForecastResponse(
     @SerialName("headline")
     val headline: Headline
 ) {
+
+    fun toForecast() = dailyForecasts.map {
+        with(it) {
+            Forecast(
+                date = date,
+                minTemp = temperature.minimum.value,
+                maxTemp = temperature.maximum.value,
+                description = day.iconPhrase,
+                iconCode = day.icon
+            )
+        }
+    }
 
     @Serializable
     data class DailyForecast(
