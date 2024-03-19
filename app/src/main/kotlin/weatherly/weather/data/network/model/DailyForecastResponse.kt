@@ -7,9 +7,7 @@ import weatherly.weather.domain.model.Forecast
 @Serializable
 data class DailyForecastResponse(
     @SerialName("DailyForecasts")
-    val dailyForecasts: List<DailyForecast>,
-    @SerialName("Headline")
-    val headline: Headline
+    val dailyForecasts: List<DailyForecast>
 ) {
 
     fun toForecast() = dailyForecasts.map {
@@ -101,26 +99,4 @@ data class DailyForecastResponse(
             )
         }
     }
-
-    @Serializable
-    data class Headline(
-        @SerialName("Category")
-        val category: String,
-        @SerialName("EffectiveDate")
-        val effectiveDate: String,
-        @SerialName("EffectiveEpochDate")
-        val effectiveEpochDate: Int,
-        @SerialName("EndDate")
-        val endDate: String,
-        @SerialName("EndEpochDate")
-        val endEpochDate: Int,
-        @SerialName("Link")
-        val link: String,
-        @SerialName("MobileLink")
-        val mobileLink: String,
-        @SerialName("Severity")
-        val severity: Int,
-        @SerialName("Text")
-        val text: String
-    )
 }

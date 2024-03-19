@@ -1,5 +1,7 @@
 package weatherly.home.ui
 
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import weatherly.core.viewState.Async
 import weatherly.weather.domain.model.Forecast
 import weatherly.weather.domain.model.Location
@@ -16,19 +18,23 @@ data class LocationItemUiState(
 
 data class ForecastItemUiState(
     val date: String,
-    val minTemp: Double,
-    val maxTemp: Double,
+    val minTemp: String,
+    val maxTemp: String,
     val description: String,
     val iconCode: Int
 )
 
 fun Location.toLocationItemUiState() = LocationItemUiState(id, name)
 
-fun Forecast.toForecastItemUiState() =
-    ForecastItemUiState(
-        date,
-        minTemp,
-        maxTemp,
+fun Forecast.toForecastItemUiState(): ForecastItemUiState {
+    val localDateTime = LocalDateTime.parse(date, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+    val formatter = DateTimeFormatter.ofPattern("MMMM dd")
+
+    return ForecastItemUiState(
+        localDateTime.format(formatter),
+        "$minTemp°",
+        "$maxTemp°",
         description,
         iconCode
     )
+}

@@ -87,9 +87,7 @@ fun LocationSearchBar(
     ) {
         when (locationItems) {
             is Async.Fail -> {
-                Text(
-                    text = stringResource(id = R.string.something_went_wrong),
-                    textAlign = TextAlign.Center,
+                ErrorMessage(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(
