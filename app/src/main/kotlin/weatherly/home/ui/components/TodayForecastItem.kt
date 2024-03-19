@@ -62,7 +62,8 @@ fun TodayForecastItem(
             }
 
             Column(
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     text = forecastItemUiState.maxTemp,
