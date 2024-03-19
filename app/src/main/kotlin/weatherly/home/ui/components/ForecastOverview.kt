@@ -21,7 +21,8 @@ import weatherly.ui.theme.spacing
 @Composable
 fun ForecastOverview(
     items: Async<List<ForecastItemUiState>>,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    onForecastItemClick: (String, String) -> Unit
 ) {
     when (items) {
         is Async.Fail -> {
@@ -47,7 +48,8 @@ fun ForecastOverview(
                 modifier = Modifier.verticalScroll(rememberScrollState())
             ) {
                 TodayForecastItem(
-                    items.value.first(),
+                    forecastItemUiState = items.value.first(),
+                    onForecastItemClick = onForecastItemClick,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = paddingValues.calculateTopPadding())
@@ -55,6 +57,7 @@ fun ForecastOverview(
                 items.value.drop(1).forEach {
                     UpcomingForecastItem(
                         forecastItemUiState = it,
+                        onForecastItemClick = onForecastItemClick,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }

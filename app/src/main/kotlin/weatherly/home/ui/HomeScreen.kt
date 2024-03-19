@@ -15,7 +15,8 @@ import weatherly.ui.theme.spacing
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel
+    viewModel: HomeViewModel,
+    onForecastItemClick: (String, String) -> Unit
 ) {
     val homeUiState = viewModel.uiState.collectAsState().value
 
@@ -32,7 +33,11 @@ fun HomeScreen(
                     .padding(MaterialTheme.spacing.small)
             )
         }
-    ) {
-        ForecastOverview(items = homeUiState.forecastItems, paddingValues = it)
+    ) { paddingValues ->
+        ForecastOverview(
+            items = homeUiState.forecastItems,
+            paddingValues = paddingValues,
+            onForecastItemClick = onForecastItemClick
+        )
     }
 }

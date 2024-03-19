@@ -52,7 +52,9 @@ class HomeViewModel(
                 _uiState.update {
                     it.copy(
                         forecastItems = Async.Success(
-                            forecast.map(Forecast::toForecastItemUiState)
+                            forecast.map { forecast ->
+                                forecast.toForecastItemUiState(locationKey)
+                            }
                         )
                     )
                 }

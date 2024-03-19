@@ -1,6 +1,7 @@
 package weatherly.home.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,11 +28,14 @@ import weatherly.ui.theme.spacing
 @Composable
 fun TodayForecastItem(
     forecastItemUiState: ForecastItemUiState,
+    onForecastItemClick: (String, String) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
     Column(
-        modifier = modifier.background(color = MaterialTheme.colorScheme.surfaceVariant),
+        modifier = modifier
+            .background(color = MaterialTheme.colorScheme.surfaceVariant)
+            .clickable { onForecastItemClick(forecastItemUiState.id, forecastItemUiState.locationId) },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
@@ -86,12 +90,15 @@ private fun TodayForecastItemPreview() {
     WeatherlyTheme {
         TodayForecastItem(
             forecastItemUiState = ForecastItemUiState(
+                id = "2024-03-21T07:00:00+01:00",
                 date = "November 30",
                 minTemp = "13.2",
                 maxTemp = "17.5",
                 description = "Moderate Rain",
-                iconCode = 18
+                iconCode = 18,
+                locationId = "117910"
             ),
+            onForecastItemClick = { _, _ -> /* no-op */ },
             modifier = Modifier.fillMaxWidth()
         )
     }

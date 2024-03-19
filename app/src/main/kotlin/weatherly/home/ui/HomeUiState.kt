@@ -17,24 +17,28 @@ data class LocationItemUiState(
 )
 
 data class ForecastItemUiState(
+    val id: String,
     val date: String,
     val minTemp: String,
     val maxTemp: String,
     val description: String,
-    val iconCode: Int
+    val iconCode: Int,
+    val locationId: String
 )
 
 fun Location.toLocationItemUiState() = LocationItemUiState(id, name)
 
-fun Forecast.toForecastItemUiState(): ForecastItemUiState {
+fun Forecast.toForecastItemUiState(locationId: String): ForecastItemUiState {
     val localDateTime = LocalDateTime.parse(date, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
     val formatter = DateTimeFormatter.ofPattern("MMMM dd")
 
     return ForecastItemUiState(
+        date,
         localDateTime.format(formatter),
         "$minTemp°",
         "$maxTemp°",
         description,
-        iconCode
+        iconCode,
+        locationId
     )
 }

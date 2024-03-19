@@ -1,5 +1,6 @@
 package weatherly.home.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,10 +24,17 @@ import weatherly.ui.theme.spacing
 @Composable
 fun UpcomingForecastItem(
     forecastItemUiState: ForecastItemUiState,
+    onForecastItemClick: (String, String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier,
+        modifier = modifier
+            .clickable {
+                onForecastItemClick(
+                    forecastItemUiState.id,
+                    forecastItemUiState.locationId
+                )
+            },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -70,12 +78,15 @@ private fun UpcomingForecastItemPreview() {
     WeatherlyTheme {
         UpcomingForecastItem(
             forecastItemUiState = ForecastItemUiState(
+                id = "2024-03-21T07:00:00+01:00",
                 date = "November 30",
                 minTemp = "13.2",
                 maxTemp = "17.5",
                 description = "Moderate Rain",
-                iconCode = 18
+                iconCode = 18,
+                locationId = "117910"
             ),
+            onForecastItemClick = { _, _ -> /* no-op */ },
             modifier = Modifier.fillMaxWidth()
         )
     }

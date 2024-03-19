@@ -4,6 +4,7 @@ import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import weatherly.core.di.threadingModule
+import weatherly.details.di.detailsModule
 import weatherly.home.di.homeModule
 import weatherly.network.di.networkModule
 import weatherly.weather.di.weatherModule
@@ -26,6 +27,7 @@ class WeatherlyApplication : Application() {
         networkModule,
         weatherModule,
         threadingModule,
-        homeModule
+        homeModule,
+        detailsModule
     )
 }
