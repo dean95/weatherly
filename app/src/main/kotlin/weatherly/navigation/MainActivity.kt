@@ -14,7 +14,7 @@ import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import weatherly.details.ui.DetailsScreen
 import weatherly.home.ui.HomeScreen
-import weatherly.ui.theme.WeatherlyTheme
+import weatherly.coreUi.theme.WeatherlyTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

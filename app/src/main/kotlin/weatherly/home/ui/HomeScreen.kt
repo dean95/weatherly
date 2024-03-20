@@ -10,7 +10,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import weatherly.home.ui.components.ForecastOverview
 import weatherly.home.ui.components.LocationSearchBar
-import weatherly.ui.theme.spacing
+import weatherly.coreUi.theme.spacing
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable

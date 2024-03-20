@@ -24,9 +24,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.weatherly.R
 import weatherly.home.ui.ForecastItemUiState
-import weatherly.ui.theme.WeatherlyTheme
-import weatherly.ui.theme.iconMap
-import weatherly.ui.theme.spacing
+import weatherly.coreUi.theme.WeatherlyTheme
+import weatherly.weather.ui.iconMap
+import weatherly.coreUi.theme.spacing
 
 @Composable
 fun TodayForecastItem(

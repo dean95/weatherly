@@ -1,4 +1,4 @@
-package weatherly.network.di
+package weatherly.core.di
 
 import android.util.Log
 import io.ktor.client.HttpClient

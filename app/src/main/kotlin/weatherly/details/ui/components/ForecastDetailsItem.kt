@@ -24,9 +24,9 @@ import androidx.compose.ui.tooling.preview.PreviewFontScale
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import com.example.weatherly.R
 import weatherly.details.ui.ForecastDetailsUiState
-import weatherly.ui.theme.WeatherlyTheme
-import weatherly.ui.theme.iconMap
-import weatherly.ui.theme.spacing
+import weatherly.coreUi.theme.WeatherlyTheme
+import weatherly.weather.ui.iconMap
+import weatherly.coreUi.theme.spacing
 
 @Composable
 fun ForecastDetailsItem(

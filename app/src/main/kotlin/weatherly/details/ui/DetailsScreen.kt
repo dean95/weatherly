@@ -22,7 +22,7 @@ import androidx.compose.ui.res.stringResource
 import com.example.weatherly.R
 import weatherly.core.viewState.Async
 import weatherly.details.ui.components.ForecastDetailsItem
-import weatherly.ui.theme.spacing
+import weatherly.coreUi.theme.spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

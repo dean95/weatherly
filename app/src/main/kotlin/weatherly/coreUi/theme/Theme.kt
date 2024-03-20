@@ -1,4 +1,4 @@
-package weatherly.ui.theme
+package weatherly.coreUi.theme
 
 import android.app.Activity
 import android.os.Build

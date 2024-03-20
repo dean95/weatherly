@@ -30,7 +30,7 @@ import com.example.weatherly.R
 import weatherly.core.viewState.Async
 import weatherly.coreUi.LoadingIndicator
 import weatherly.home.ui.LocationItemUiState
-import weatherly.ui.theme.spacing
+import weatherly.coreUi.theme.spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

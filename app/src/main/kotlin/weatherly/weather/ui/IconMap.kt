@@ -1,4 +1,4 @@
-package weatherly.ui.theme
+package weatherly.weather.ui
 
 import com.example.weatherly.R
 

@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewFontScale
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import com.example.weatherly.R
-import weatherly.ui.theme.WeatherlyTheme
+import weatherly.coreUi.theme.WeatherlyTheme
 
 @Composable
 fun ErrorMessage(

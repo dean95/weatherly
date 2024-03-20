@@ -6,7 +6,7 @@ import org.koin.core.context.startKoin
 import weatherly.core.di.threadingModule
 import weatherly.details.di.detailsModule
 import weatherly.home.di.homeModule
-import weatherly.network.di.networkModule
+import weatherly.core.di.networkModule
 import weatherly.weather.di.weatherModule
 
 class WeatherlyApplication : Application() {
