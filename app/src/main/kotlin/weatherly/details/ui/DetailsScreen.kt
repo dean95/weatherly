@@ -38,7 +38,7 @@ fun DetailsScreen(
                 title = {
                     Text(
                         text = stringResource(id = R.string.details),
-                        style = MaterialTheme.typography.titleLarge
+                        style = MaterialTheme.typography.titleMedium
                     )
                 },
                 navigationIcon = {
