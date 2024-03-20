@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import weatherly.core.viewState.Async
-import weatherly.weather.domain.model.Forecast
 import weatherly.weather.domain.model.Location
 import weatherly.weather.domain.useCase.FetchFiveDayForecast
 import weatherly.weather.domain.useCase.FetchLocationsForQuery

@@ -33,12 +33,12 @@ fun Forecast.toForecastItemUiState(locationId: String): ForecastItemUiState {
     val formatter = DateTimeFormatter.ofPattern("MMMM dd")
 
     return ForecastItemUiState(
-        date,
-        localDateTime.format(formatter),
-        "$minTemp°",
-        "$maxTemp°",
-        description,
-        iconCode,
-        locationId
+        id = date,
+        date = localDateTime.format(formatter),
+        minTemp = "$minTemp°",
+        maxTemp = "$maxTemp°",
+        description = descriptionDay,
+        iconCode = iconCodeDay,
+        locationId = locationId
     )
 }

@@ -16,8 +16,10 @@ data class DailyForecastResponse(
                 date = date,
                 minTemp = temperature.minimum.value,
                 maxTemp = temperature.maximum.value,
-                description = day.iconPhrase,
-                iconCode = day.icon
+                descriptionDay = day.iconPhrase,
+                iconCodeDay = day.icon,
+                descriptionNight = night.iconPhrase,
+                iconCodeNight = night.icon
             )
         }
     }

@@ -4,6 +4,8 @@ data class Forecast(
     val date: String,
     val minTemp: Double,
     val maxTemp: Double,
-    val description: String,
-    val iconCode: Int
+    val descriptionDay: String,
+    val iconCodeDay: Int,
+    val descriptionNight: String,
+    val iconCodeNight: Int
 )
