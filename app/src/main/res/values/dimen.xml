@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="back_button_size">48dp</dimen>
+    <dimen name="forecast_icon_size_large">128dp</dimen>
 </resources>

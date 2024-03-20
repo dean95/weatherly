@@ -13,6 +13,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,6 +23,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.example.weatherly.R
@@ -83,7 +85,12 @@ fun LocationSearchBar(
                     contentDescription = stringResource(id = R.string.cd_close_icon)
                 )
             }
-        }
+        },
+        colors = SearchBarDefaults.colors(
+            containerColor = Color.White
+        ),
+        shadowElevation = MaterialTheme.spacing.extraSmall,
+        shape = RoundedCornerShape(MaterialTheme.spacing.medium)
     ) {
         when (locationItems) {
             is Async.Fail -> {

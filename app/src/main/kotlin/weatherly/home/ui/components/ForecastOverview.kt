@@ -50,9 +50,9 @@ fun ForecastOverview(
                 TodayForecastItem(
                     forecastItemUiState = items.value.first(),
                     onForecastItemClick = onForecastItemClick,
+                    topPadding = paddingValues.calculateTopPadding(),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = paddingValues.calculateTopPadding())
                 )
                 items.value.drop(1).forEach {
                     UpcomingForecastItem(

@@ -15,13 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewFontScale
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
-import androidx.compose.ui.unit.dp
+import com.example.weatherly.R
 import weatherly.details.ui.ForecastDetailsUiState
 import weatherly.ui.theme.WeatherlyTheme
 import weatherly.ui.theme.iconMap
@@ -56,7 +57,8 @@ fun ForecastDetailsItem(
                 Icon(
                     painter = painterResource(id = iconMap.getValue(forecastDetailsUiState.iconCodeDay)),
                     contentDescription = forecastDetailsUiState.descriptionDay,
-                    tint = Color.Unspecified, modifier = Modifier.size(128.dp)
+                    tint = Color.Unspecified,
+                    modifier = Modifier.size(dimensionResource(id = R.dimen.forecast_icon_size_large))
                 )
 
                 Text(
@@ -93,7 +95,8 @@ fun ForecastDetailsItem(
                 Icon(
                     painter = painterResource(id = iconMap.getValue(forecastDetailsUiState.iconCodeNight)),
                     contentDescription = forecastDetailsUiState.descriptionNight,
-                    tint = Color.Unspecified, modifier = Modifier.size(128.dp)
+                    tint = Color.Unspecified,
+                    modifier = Modifier.size(dimensionResource(id = R.dimen.forecast_icon_size_large))
                 )
 
                 Text(
