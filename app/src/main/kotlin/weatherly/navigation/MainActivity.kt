@@ -52,8 +52,8 @@ fun MainScreen(navController: NavHostController) {
                             it.arguments?.getString(LOCATION_ID_KEY) ?: error("$LOCATION_ID_KEY not passed.")
                         )
                     }
-                )
-            )
+                ),
+                onBackClick = navController::navigateUp)
         }
     }
 }
