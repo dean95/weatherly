@@ -2,7 +2,6 @@ package weatherly.home.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import java.io.IOException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -57,8 +56,8 @@ class HomeViewModel(
                         )
                     )
                 }
-            } catch (ioe: IOException) {
-                _uiState.update { it.copy(forecastItems = Async.Fail(ioe)) }
+            } catch (e: Exception) {
+                _uiState.update { it.copy(forecastItems = Async.Fail(e)) }
             }
         }
     }
@@ -75,8 +74,8 @@ class HomeViewModel(
                             _uiState.update { it.copy(locationItems = Async.Loading) }
                             val locations = fetchLocationsForQuery(query)
                             flowOf(locations)
-                        } catch (ioe: IOException) {
-                            _uiState.update { it.copy(locationItems = Async.Fail(ioe)) }
+                        } catch (e: Exception) {
+                            _uiState.update { it.copy(locationItems = Async.Fail(e)) }
                             emptyFlow()
                         }
                     } else {

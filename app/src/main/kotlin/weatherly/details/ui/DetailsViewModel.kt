@@ -2,7 +2,6 @@ package weatherly.details.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import java.io.IOException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -36,8 +35,8 @@ class DetailsViewModel(
                         forecastItem = Async.Success(forecast.toForecastDetailsUiState())
                     )
                 }
-            } catch (ioe: IOException) {
-                _uiState.update { it.copy(forecastItem = Async.Fail(ioe)) }
+            } catch (e: Exception) {
+                _uiState.update { it.copy(forecastItem = Async.Fail(e)) }
             }
         }
     }
